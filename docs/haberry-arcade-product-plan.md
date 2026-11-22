@@ -1,5 +1,7 @@
 # Haberry Arcade SaaS product plan
 
+See the [implementation and architecture plan](./haberry-arcade-implementation-plan.md) for the current platform admin, multi-location, Windows, and deployment scope. It takes precedence for those areas.
+
 Haberry Arcade helps local gaming centers track who is playing, what each session costs, which payments were received, and whether the till balances at the end of a shift. A Windows counter app runs daily operations. An authenticated website gives owners and managers remote visibility, settings, and reports. A public website explains the product and collects demo enquiries.
 
 **Working name:** Haberry Arcade. Haberry Hub remains an option if the product expands beyond gaming centers.  

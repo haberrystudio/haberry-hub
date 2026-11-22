@@ -96,3 +96,39 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## Haberry Arcade Super Admin
+
+From `backend/` with Node 22 or newer, copy `.env.example` to `.env`. For Neon,
+paste the direct connection string from **Connect** into `DATABASE_URL` and keep
+its TLS parameters. The backend and database scripts also accept
+`DATABASE_URL` from the repository-root `.env.local` or `.env` populated by
+Neon. A backend-local value takes precedence over a root file. To use a local database instead, run
+`docker compose up -d --wait postgres` from the repository root and use the
+example URL. Set a private admin email and password (14–128 characters).
+
+```powershell
+npm install
+npm run db:migrate
+npm run db:seed-admin
+npm run start:dev
+```
+
+The install generates Prisma Client. Remove the admin bootstrap variables
+from `.env` after seeding. Rerunning the seed with the same email preserves
+that account and its password.
+
+If you already applied the original SQL migration, verify that
+`platform_admins` and `platform_sessions` match
+`prisma/migrations/0001_platform/migration.sql`. Then run
+`npx prisma migrate resolve --applied 0001_platform` before
+`npm run db:migrate`. This records the existing schema in Prisma's migration
+history and preserves existing accounts and sessions. For an empty database,
+run `npm run db:migrate` directly.
+
+In another terminal, run `npm install` and `npm run dev` from `frontend/`, then
+visit [Super Admin sign-in](http://localhost:3000/super-admin/login). If the API is
+at a different address, set the server-only `HABERRY_API_URL` in the frontend
+environment. The API defaults to loopback port 4000.
+
+Use the current sign-in for local development. Before exposing a production
+platform portal, add MFA for privileged staff and shared rate limits.
